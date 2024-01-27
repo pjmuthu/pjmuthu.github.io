@@ -53,17 +53,7 @@
         efficient deployment in various applications, including embedded
         systems.</span><br>
       <span style="font-family: Helvetica,Arial,sans-serif;"></span>
-      <p><span style="font-family: Helvetica,Arial,sans-serif;"><br>
-          While similar concepts have been explored in recent publications or
-          websites, this project distinguishes itself by focusing on practical
-          real-time applications rather than post-processing training sets.
-          Notably, the neural network is compiled in WebAssembly, providing
-          superior performance and speed compared to slower JavaScript
-          implementations commonly seen in similar applications. This approach
-          aims to demonstrate the efficiency and speed achievable even within a
-          web browser environment.<br>
-          <br>
-        </span></p>
+
     </blockquote>
     <h1 style="text-align: center;"><span style="font-family: Helvetica,Arial,sans-serif;">How
         to Play<br>
@@ -127,61 +117,7 @@
         immediate player changes (learning patterns and adapting within 2-16
         moves); a long-term model storing player biases with approximately 16
         examples of play.</span><br>
-      <span style="font-family: Helvetica,Arial,sans-serif;"></span>
-      <p><span style="font-family: Helvetica,Arial,sans-serif;">The specific
-          models used involves feedforward neural networks, where n-grams serve
-          as inputs, and the outputs are always three (for the three options:
-          Rock, Paper, Scissors). A single hidden layer was deemed sufficient,
-          as additional complexity did not yield performance improvements.
-          Various encoding methods were attempted, with the most effective being
-          numerical double encoding (-1 for Rock, 0 for Paper, +1 for Scissors).
-          While this encoding is not the most efficient, the intention was for
-          subsequent neurons to capture the issue of zero efficiency. Explicitly
-          encoding inputs was challenging due to exponential nature, and
-          sequence-based neural networks like LSTM were not implemented at the
-          time.<br>
-          <br>
-          Each model provides a score (from -3 to 3) based on the last five
-          hands (win = 1, tie = 0, loss = -1), aiming to identify general
-          changes in strategies. The predicted outcome for each turn, from each
-          model, is weighted by the current score to determine the overall AI
-          move. For instance, if the short-term model is outperforming others
-          due to recent successful choices by the player, its decisions will
-          override results from the other models.<br>
-          <br>
-          To evaluate the models, data was collected across 15,000 games
-          involving 50 players. In principle, this model should be able to
-          defeat any player over time due to external data for training. The
-          underlying assumption is that human responses are not purely random,
-          and the control case, resembling a simple rule (if the player does x,
-          then I do y), achieved a 41% win rate, surpassing random chance (33%).</span></p>
-      <p></p>
-      <h2 style="text-align: center;"><span style="font-family: Helvetica,Arial,sans-serif;">Short-Term
-          Model</span></h2>
-      <h2><span style="font-family: Helvetica,Arial,sans-serif;"></span></h2>
-      <p><span style="font-family: Helvetica,Arial,sans-serif;">The short-term
-          model is a (3, 1, 2, 3) model with 2 inputs, 1 hidden layer, 4
-          neurons, and 3 outputs. It is expected to achieve a performance of
-          44%, slightly better than a simple 1-gram control and random. This
-          model rapidly adapts to input changes and trains on the last 16
-          observations (17 total weights), potentially learning new short
-          patterns from players attempting to confuse the AI with variant
-          patterns.<br>
-        </span></p>
-      <h2 style="text-align: center;"><span style="font-family: Helvetica,Arial,sans-serif;">Long-Term
-          Model</span></h2>
-      <h2><span style="font-family: Helvetica,Arial,sans-serif;"></span></h2>
-      <p><span style="font-family: Helvetica,Arial,sans-serif;">The long-term
-          model is a (4, 1, 5, 3) model with a higher performance of 57%. It
-          aims to learn long-term patterns from players using more complex
-          logic. This model trains on the last 32 observations (38 total
-          weights), potentially capturing specific player biases, and remains
-          persistent between plays. If a player adopts a wholly different
-          strategy, the AI relies on the short-term model until enough data is
-          available to learn the new strategy. If a player stops a strategy and
-          resumes their existing playstyle, the long-term model recovers.<br>
-          <br>
-        </span></p>
+
     </blockquote>
   </body>
 </html>
